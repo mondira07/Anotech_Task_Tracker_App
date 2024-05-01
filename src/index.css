@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Customize app bar */
+.MuiAppBar-root {
+  background-color: #6b319b; /* Set app bar background color */
+}
+
+.MuiAppBar-root .MuiToolbar-root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MuiAppBar-root .MuiTypography-root {
+  font-weight: bold;
+}
+
+/* Customize tabs */
+.MuiTabs-root {
+  background-color: #EEEAD9; /* Set tabs background color */
+}
+
+.MuiTabs-root .MuiTab-root {
+  font-weight: bold;
+}
+
+/* Customize active tab */
+.MuiTabs-root .MuiTab-root.Mui-selected {
+  color: #143200; /* Set text color for active tab */
+}
+
+/* Customize container */
+.MuiContainer-root {
+  margin-top: 2rem;
+}
+
+/* Customize task form */
+.MuiBox-root .task-form {
+  margin-bottom: 1rem;
+}
+
+/* Customize task list */
+.MuiBox-root .task-list {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize dark mode icon */
+.MuiBox-root .dark-mode-icon {
+  color: #fff;
+}
+
+/* Customize settings tab */
+.MuiBox-root .settings-tab {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
