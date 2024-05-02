@@ -36,8 +36,7 @@ const TaskList = ({ tasks, onDeleteTask, onEditTask, onMarkTaskAsCompleted, dark
     task.name.toLowerCase().includes(filterKeyword.toLowerCase())
   );
 
-  const sortedTasks = filteredTasks.slice().sort((a, b) => {
-    // Sort tasks alphabetically by name
+  const sortedTasks = filteredTasks.slice().sort((a, b) => {   
     const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();
     if (nameA < nameB) return -1;
@@ -58,23 +57,23 @@ const TaskList = ({ tasks, onDeleteTask, onEditTask, onMarkTaskAsCompleted, dark
       <List>
         {sortedTasks.map((task, index) => (
           <ListItem key={index}>
-            {editIndex === index ? (
-              <>
-                <TextField
-                  value={editedName}
-                  onChange={(e) => setEditedName(e.target.value)}
-                />
-                <TextField
-                  value={editedDescription}
-                  onChange={(e) => setEditedDescription(e.target.value)}
-                />
-                <Button onClick={() => handleSave(index)}>Save</Button>
-                <Button onClick={handleCancel}>Cancel</Button>
-              </>
-            ) : (
-              <>
-                <ListItemText primary={task.name} secondary={task.description} />
-                <ListItemSecondaryAction>
+            <ListItemText primary={task.name} secondary={task.description} />
+            <ListItemSecondaryAction>
+              {editIndex === index ? (
+                <>
+                  <TextField
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                  />
+                  <TextField
+                    value={editedDescription}
+                    onChange={(e) => setEditedDescription(e.target.value)}
+                  />
+                  <Button onClick={() => handleSave(index)} sx={{ color: darkMode ? 'white' : 'primary.dark' }}>Save</Button>
+                  <Button onClick={handleCancel} sx={{ color: darkMode ? 'white' : 'primary.dark' }}>Cancel</Button>
+                </>
+              ) : (
+                <>
                   <IconButton onClick={() => handleEdit(index, task.name, task.description)}>
                     <Edit />
                   </IconButton>
@@ -85,14 +84,14 @@ const TaskList = ({ tasks, onDeleteTask, onEditTask, onMarkTaskAsCompleted, dark
                     <Button
                       onClick={() => onMarkTaskAsCompleted(index)}
                       startIcon={<Done />}
-                      sx={{ color: darkMode ? 'white' : 'primary.dark' }} // Change color based on dark mode
+                      sx={{ color: darkMode ? 'white' : 'primary.dark' }}   
                     >
                       Mark as Completed
                     </Button>
                   )}
-                </ListItemSecondaryAction>
-              </>
-            )}
+                </>
+              )}
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>

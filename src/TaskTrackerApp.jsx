@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Container, CssBaseline, Box, Tab, Tabs, IconButton, Stack, useMediaQuery, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, CssBaseline, Box, Tab, Tabs, IconButton, Stack, useMediaQuery, Badge } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Brightness4 as DarkModeIcon, Brightness7 as LightModeIcon, CheckCircleOutline as TasksIcon, DoneAll as CompletedTasksIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import TaskForm from './components/TaskForm';
@@ -12,6 +12,7 @@ const TaskTrackerApp = () => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [tabValue, setTabValue] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   useEffect(() => {
     const storedTasks = localStorage.getItem('tasks');
@@ -72,7 +73,7 @@ const TaskTrackerApp = () => {
         main: '#143200',
       },
       secondary: {
-        main: '#143200',
+        main: '#000000',
       },
     },
   });
@@ -81,7 +82,9 @@ const TaskTrackerApp = () => {
     setTabValue(newValue);
   };
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const countCompletedTasks = () => {
+    return completedTasks.length;
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -97,16 +100,14 @@ const TaskTrackerApp = () => {
             </IconButton>
           </Stack>
         </Toolbar>
-        <Tabs value={tabValue} onChange={handleChangeTab} indicatorColor="primary" textColor="inherit" variant="fullWidth">
+        <Tabs value={tabValue} onChange={handleChangeTab} indicatorColor="primary" textColor="inherit" variant={isMobile ? "scrollable" : "fullWidth"}>
           <Tab label="Tasks" icon={<TasksIcon />} sx={{ fontWeight: 'semibold', color: 'primary.main' }} />
-          <Tab label="Completed Tasks" icon={<CompletedTasksIcon />} sx={{ fontWeight: 'semibold', color: 'primary.main' }} />
+          <Tab label={`Completed Tasks (${countCompletedTasks()})`} icon={<CompletedTasksIcon />} sx={{ fontWeight: 'semibold', color: 'primary.main' }} />
           <Tab label="Settings" icon={<SettingsIcon />} sx={{ fontWeight: 'semibold', color: 'primary.main' }} />
         </Tabs>
       </AppBar>
       <Container sx={{ mt: 8 }}>
-        <Box sx={{ bgcolor: darkMode ? '#333' : '#EEEAD9', p: 3, borderRadius: 8
-      
-      }}>
+        <Box sx={{ bgcolor: darkMode ? '#333' : '#EEEAD9', p: 3, borderRadius: 8 }}>
           {tabValue === 0 && (
             <>
               <TaskForm onAddTask={handleAddTask} />
@@ -115,7 +116,7 @@ const TaskTrackerApp = () => {
                 onDeleteTask={handleDeleteTask}
                 onEditTask={handleEditTask}
                 onMarkTaskAsCompleted={handleMarkTaskAsCompleted}
-                darkMode={darkMode} // Pass darkMode prop to TaskList
+                darkMode={darkMode} 
               />
             </>
           )}
